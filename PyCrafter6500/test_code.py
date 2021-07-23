@@ -10,7 +10,7 @@ images=[]
 #images.append((numpy.asarray(PIL.Image.open("../test_images/dot_middle_100_pos.tif"))))
 #images.append((numpy.asarray(PIL.Image.open("../test_images/dot_array_3x3_75r_pos.tif"))))
 #images.append((numpy.asarray(PIL.Image.open("../test_images/Group_test.bmp"))))
-images.append((numpy.asarray(PIL.Image.open("../test_images/test.tif"))))
+images.append((numpy.asarray(PIL.Image.open("../test_images/test2.tif"))))
 
 # Open the USB connection to the DMD
 dlp=pycrafter6500.dmd()
@@ -25,7 +25,7 @@ exposure=[500*10**3] # Exposure time in us
 dark_time=[0]*30    # Dak time in us
 trigger_in=[True]   # Whether to use an input trigger
 trigger_out=[False] # Whether to enable the output trigger
-repititions=1       # Number of times to repeat 0 is infinite
+repititions=0       # Number of times to repeat 0 is infinite
 
-dlp.defsequence(images,exposure,trigger_in,dark_time,trigger_out,1)
+dlp.defsequence(images,exposure,trigger_in,dark_time,trigger_out,repititions)
 dlp.startsequence()

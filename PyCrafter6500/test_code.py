@@ -4,7 +4,10 @@ import PIL.Image
 
 # Create the bmp image map
 images=[]
-images.append((numpy.asarray(PIL.Image.open("testimage.tif"))//129))
+
+# The cat test image is 255 logic, // is floor dividsion to be 0 and 1
+#images.append((numpy.asarray(PIL.Image.open("testimage.tif"))//129))
+images.append((numpy.asarray(PIL.Image.open("../test_images/dot_middle_100_pos.tif"))))
 
 # Open the USB connection to the DMD
 dlp=pycrafter6500.dmd()

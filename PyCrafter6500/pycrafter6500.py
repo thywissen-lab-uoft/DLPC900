@@ -295,7 +295,11 @@ class dmd():
             print (hex(i))
 
 ## functions for idle mode activation
-
+# Idle Mode Command Pp. 48
+#This mode enables a 50/50 duty cycle pattern sequence, where
+#the entire mirror array is continuously flipped periodically between the on and off states. Whenever this mode is
+#enabled, the LED Enable outputs are disabled to prevent illumination on the DMD. When operating with a subset
+#of DMD blocks, enable this mode as often as possible
     def idle_on(self):
         self.command('w',0x00,0x02,0x01,[int('00000001',2)])
         self.checkforerrors()
@@ -305,21 +309,30 @@ class dmd():
         self.checkforerrors()
 
 ## functions for power management
-
+# PowerMode Command Pp. 22
+#The Power Control places the DLPC900 in a standby state and powers down the DMD interface. Enter Standby
+#mode prior to any planned system power shutdowns to safely park the micro-mirrors
+    
+# Put the DMD in standby
     def standby(self):
         self.command('w',0x00,0x02,0x00,[int('00000001',2)])
         self.checkforerrors()
 
+# Return to normal mode
     def wakeup(self):
         self.command('w',0x00,0x02,0x00,[int('00000000',2)])
         self.checkforerrors()
 
+# Reserved
     def reset(self):
         self.command('w',0x00,0x02,0x00,[int('00000010',2)])
         self.checkforerrors()
 
 ## test write and read operations, as reported in the dlpc900 programmer's guide
 
+# Curtain Color Command Pp. 23
+# This register provides image curtain control. When enabled and the input source is set to external video with no
+# video source connected, a solid color field is displayed on the entire DMD display
     def testread(self):
         self.command('r',0xff,0x11,0x00,[])
         self.readreply()
@@ -330,9 +343,18 @@ class dmd():
 
 ## some self explaining functions
 
+# Display Mode Command Pp. 45
+# 0 : Video Mode;
+# 1 : Pre-stored pattern (from flash)
+# 2 : Video pattern
+# 3 : Pattern on the fly mode (USB/I2C)
     def changemode(self,mode):
         self.command('w',0x00,0x1a,0x1b,[mode])
         self.checkforerrors()
+
+# Pattern Dispaly Start/Stop Pp. 56
+# The Pattern Display Start/Stop command starts or stops the programmed pattern sequence. A
+# 0 : Stop, 1 : Pause, 2 : Start, 3 : Reserved    
 
     def startsequence(self):
         self.command('w',0x00,0x1a,0x24,[2])
@@ -346,7 +368,9 @@ class dmd():
         self.command('w',0x00,0x1a,0x24,[0])
         self.checkforerrors()
 
-
+# Pattern Dispaly LUT Configuration Pp. 57
+# The Pattern Display LUT Configuration command controls the execution of patterns stored in the lookup table
+# (LUT). Before executing this command, stop the current pattern sequence.
     def configurelut(self,imgnum,repeatnum):
         img=convlen(imgnum,11)
         repeat=convlen(repeatnum,32)
@@ -358,7 +382,7 @@ class dmd():
         self.command('w',0x00,0x1a,0x31,bytes)
         self.checkforerrors()
         
-
+# Pattern display LUT Definition Pp. 59
     def definepattern(self,index,exposure,bitdepth,color,triggerin,darktime,triggerout,patind,bitpos):
         payload=[]
         index=convlen(index,16)
@@ -404,7 +428,10 @@ class dmd():
         self.checkforerrors()
         
 
-
+# Initialize Pattern BMP Load Pp. 61
+# When the Initialize Pattern BMP Load command is issued, the patterns in the flash are not used until the pattern
+# mode is disabled by command. Follow this command by the Pattern BMP Load command to load the images.
+# Load the images in the reverse order
     def setbmp(self,index,size):
         payload=[]
 
@@ -426,7 +453,10 @@ class dmd():
 ## bmp loading function, divided in 56 bytes packages
 ## max  hid package size=64, flag bytes=4, usb command bytes=2
 ## size of package description bytes=2. 64-4-2-2=56
-
+# Pattern BMP Load Pp. 61
+# This command is used for updating the pattern images on-the-fly. This loads the full compressed 24 bit BMP
+# images into the internal memory of the DLPC900. This command is issued after the Init pattern BMP command
+# and multiple times until all the bytes are sent.
     def bmpload(self,image,size):
 
         packnum=size//504+1
@@ -450,8 +480,6 @@ class dmd():
                 payload.append(image[counter])
                 counter+=1
             self.command('w',0x11,0x1a,0x2b,payload)
-
-
             self.checkforerrors()
 
 

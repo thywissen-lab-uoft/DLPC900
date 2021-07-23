@@ -9,7 +9,7 @@ Y=1:1080;
 mask=zeros(1080,1920);
 
 % Circle Radius
-R=20;
+R=50;
 
 Yc=1080/2;
 Xc=1920/2;
@@ -24,7 +24,7 @@ pos=[...
     -1 0;
     1 0;
     2 0];
-pos=pos*100;
+pos=pos*200;
 
 foo=@(x,y,xC,yC) ((x-xC).^2+(y-yC).^2)<=R.^2;
 
@@ -32,8 +32,10 @@ for kk=1:size(pos,1)
    mask=mask+foo(xx,yy,Xc+pos(kk,1),Yc+pos(kk,2))   ;
     
 end
-mask=logical(mask);
-imwrite(mask, 'test.tif','tif');
+mask_L=logical(mask);
+imwrite(mask_L, 'test.tif','tif','Compression','none');
+% imwrite(mask, 'test_rle.tif','tif','Compression','rle');
+
     
     
 

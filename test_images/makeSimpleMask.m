@@ -34,7 +34,7 @@ for kk=1:size(pos,1)
 end
 mask_L=logical(mask);
 imwrite(mask_L, 'test.tif','tif','Compression','none');
-% imwrite(mask, 'test_rle.tif','tif','Compression','rle');
+imwrite(mask, 'test_rle.hdf','hdf','Compression','rle');
 
     
     

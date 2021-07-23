@@ -12,3 +12,8 @@ The DLPC900 EVM DMD has an automated kHz flicker to prevent mechnical decay of t
 
 Installation of the Lightcrafter installer allows you to use the DMD from the GUI.  To use the SDK, please follow the instructions in the SDK installation PDF.
 
+(1) CMake 
+(2) Qt v5.3.2 https://master.qt.io/new_archive/qt/5.3/5.3.2/
+(3) OpenCB
+(4) Doxygen
+(5) TI DLP SDK

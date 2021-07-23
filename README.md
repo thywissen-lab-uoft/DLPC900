@@ -10,3 +10,5 @@ This repository has the SDK and the firmware in the installation folder.  The GU
 
 The DLPC900 EVM DMD has an automated kHz flicker to prevent mechnical decay of the mirrors.  We use as simple custom circuit to override this flickering when operating the DMD. One curious thing is that logic of the DMD appear to switch when the flickering is disabled.
 
+Installation of the Lightcrafter installer allows you to use the DMD from the GUI.  To use the SDK, please follow the instructions in the SDK installation PDF.
+

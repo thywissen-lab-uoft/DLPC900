@@ -527,7 +527,7 @@ class dmd():
             print ('uploading...')
             self.bmpload(encodedimages[(num-1)//24-i],sizes[(num-1)//24-i])
 
-
+        print('complete')
 
 
 

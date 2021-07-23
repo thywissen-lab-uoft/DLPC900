@@ -8,6 +8,8 @@ images=[]
 # The cat test image is 255 logic, // is floor dividsion to be 0 and 1
 #images.append((numpy.asarray(PIL.Image.open("testimage.tif"))//129))
 images.append((numpy.asarray(PIL.Image.open("../test_images/dot_middle_100_pos.tif"))))
+#images.append((numpy.asarray(PIL.Image.open("../test_images/dot_array_3x3_75r_pos.tif"))))
+#images.append((numpy.asarray(PIL.Image.open("../test_images/Group_test.bmp"))))
 
 # Open the USB connection to the DMD
 dlp=pycrafter6500.dmd()
@@ -24,5 +26,5 @@ trigger_in=[True]   # Whether to use an input trigger
 trigger_out=[False] # Whether to enable the output trigger
 repititions=1       # Number of times to repeat 0 is infinite
 
-dlp.defsequence(images,exposure,trigger_in,dark_time,trigger_out,repititions)
+dlp.defsequence(images,exposure,trigger_in,dark_time,trigger_out,0)
 dlp.startsequence()

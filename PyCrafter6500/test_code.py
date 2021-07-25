@@ -27,5 +27,5 @@ trigger_in=[True]   # Whether to use an input trigger
 trigger_out=[False] # Whether to enable the output trigger
 repetitions=0       # Number of times to repeat 0 is infinite
 
-dlp.defsequence(images,exposure,trigger_in,dark_time,trigger_out,repetitions)
-dlp.startsequence()
+#dlp.defsequence(images,exposure,trigger_in,dark_time,trigger_out,repetitions)
+#dlp.startsequence()

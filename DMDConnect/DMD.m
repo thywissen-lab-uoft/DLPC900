@@ -288,7 +288,7 @@ classdef DMD < handle
                 clearAfter      = 1;    % clear pattern after exposure
                 bitDepth        = 1;    % desired bit depth (1 corresponds to bitdepth of 1)
                 leds            = 1;    % select which color to use
-                triggerIn       = 1;    % wait for trigger or cuntinue
+                triggerIn       = 0;    % wait for trigger or cuntinue
                 darkTime        = 0;    % dark time after exposure in us
                 triggerOut      = 0;    % use trigger2 as output
                 patternIdx      = 0;    % image pattern index

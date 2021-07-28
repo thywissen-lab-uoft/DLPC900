@@ -9,9 +9,9 @@ addpath(dmdDir);addpath(genpath(dmdDir))
 I=ones(1080,1920);
 
 % Initialize to zeros
-%I=zeros(1080,1920);
+% I=zeros(1080,1920);
 
-R=50;
+R=100;
 [xx,yy]=meshgrid(1:1920,1:1080);
 inds=sqrt((xx-1920/2).^2+(yy-1080/2).^2)<R;
 I(inds)=0;

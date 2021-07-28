@@ -20,7 +20,7 @@ D.setMode(3);
 pat=struct;
 pat.idx             = 0;        % pattern index
 pat.exposureTime    = 1000E3;     % exposure time in us
-pat.clearAfter      = 0;        % clear pattern after exposure
+pat.clearAfter      = 1;        % clear pattern after exposure
 pat.bitDepth        = 1;        % desired bit depth (1 corresponds to bitdepth of 1)
 pat.leds            = 0;        % select which color to use
 pat.triggerIn       = 0;        % wait for trigger or cuntinue

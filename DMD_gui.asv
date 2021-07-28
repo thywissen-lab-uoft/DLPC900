@@ -55,9 +55,10 @@ D.uploadPattern(BMP);
 % Start the 
 D.patternControl(2);
 
-%D.displayImage(ones(1080,1920));
 
-pause(1);
+D.displayImage(ones(1080,1920));
+
+pause(.1);
 
 % Stop any existing sequences
 D.patternControl(0);

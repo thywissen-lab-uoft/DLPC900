@@ -303,7 +303,7 @@ classdef DMD < handle
                 bitDepth=opts.bitDepth;    % desired bit depth (1 corresponds to bitdepth of 1)
                 leds=opts.leds;    % select which color to use
                 triggerIn=opts.triggerIn;    % wait for trigger or cuntinue
-                darkTime=opts.darkTime;    % dark time after exposure in us
+                darkTime=opts.darkTime0;    % dark time after exposure in us
                 triggerOut=opts.triggerOut;    % use trigger2 as output
                 patternIdx=opts.patternIdx;    % image pattern index
                 bitPosition=opts.bitPosition;    % bit position in image pattern

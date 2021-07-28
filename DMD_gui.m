@@ -28,7 +28,12 @@ D.setMode(3);
 I=ones(1080,1920);
 
 % Initialize to zeros
-% I=zeros(1080,1920);
+%I=zeros(1080,1920);
+
+[xx,yy]=meshgrid(1:1920,1:1080);
+
+inds=sqrt((xx-1920/2).^2+(yy-1080/2).^2)<50;
+I(inds)=0;
 
 % Convert image to BMP
 fprintf('Converting image matrix to compressed BMP ... ');
@@ -71,9 +76,9 @@ D.numOfImages(numImages,numRepititions);
 %% Start Sequence
 
 % Start the sequence
-D.patternControl(2);
+D.patternControl(2); % 0 : stop, 1: pause, 2: start
 
 % Disconnect from DMD
-D.delete;
+%D.delete;
 end
 

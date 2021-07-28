@@ -281,11 +281,8 @@ classdef DMD < handle
         
         function definePattern(dmd,opts) % 0x1A34
             %DMD.definePattern Defines the LUT entry for a pattern
-            %
-            %
-            
-            if nargin==1
-            
+
+            if nargin==1            
                 idx             = 0;    % pattern index
                 exposureTime    = 500000;  % exposure time in us
                 clearAfter      = 1;    % clear pattern after exposure
@@ -297,6 +294,7 @@ classdef DMD < handle
                 patternIdx      = 0;    % image pattern index
                 bitPosition     = 0;    % bit position in image pattern
             else            
+                disp('custom input');
                 idx=opts.idx;  % pattern index
                 exposureTime=opts.exposureTime;  % exposure time in us
                 clearAfter=opts.clearAfter;    % clear pattern after exposure
@@ -309,7 +307,14 @@ classdef DMD < handle
                 bitPosition=opts.bitPosition;    % bit position in image pattern
             end
             
+            % byte 0:1, b0:15 is pattern index 0-511
+            % byte 2:4, b0:23 is exposure in us
             
+            % byte 5    b0 - clear after exposure, applies to triggered
+            % byte 5    b1:3 bit depth
+            % byte 5    b4:6 LED status
+            
+            % byte 6:8 b0:23 - dark display time after exposure in us
             
             % define commandstring bytewise as per the C900 Programmer's
             % guide

@@ -283,9 +283,8 @@ classdef DMD < handle
             %DMD.definePattern Defines the LUT entry for a pattern
             %
             %
-            
-            if nargin==1
-            
+            % 
+            if nargin==1            
                 idx             = 0;    % pattern index
                 exposureTime    = 500000;  % exposure time in us
                 clearAfter      = 1;    % clear pattern after exposure
@@ -297,17 +296,21 @@ classdef DMD < handle
                 patternIdx      = 0;    % image pattern index
                 bitPosition     = 0;    % bit position in image pattern
             else            
+                disp('custom input');
                 idx=opts.idx;  % pattern index
                 exposureTime=opts.exposureTime;  % exposure time in us
                 clearAfter=opts.clearAfter;    % clear pattern after exposure
                 bitDepth=opts.bitDepth;    % desired bit depth (1 corresponds to bitdepth of 1)
                 leds=opts.leds;    % select which color to use
                 triggerIn=opts.triggerIn;    % wait for trigger or cuntinue
-                darkTime=opts.darkTime0;    % dark time after exposure in us
+                darkTime=opts.darkTime;    % dark time after exposure in us
                 triggerOut=opts.triggerOut;    % use trigger2 as output
                 patternIdx=opts.patternIdx;    % image pattern index
                 bitPosition=opts.bitPosition;    % bit position in image pattern
             end
+            
+            % byte 0:1, b0:15 is pattern index 0-511
+            % byte 2:4, b0:23 is exposure in us
             
             
             

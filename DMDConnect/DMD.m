@@ -158,7 +158,7 @@ classdef DMD < handle
             end
         end
         
-        function display(dmd,I)
+        function displayImage(dmd,I)
             %DMD.display supermethod to prepare, upload and show a matlab
             %matrix
             %
@@ -169,7 +169,7 @@ classdef DMD < handle
             % - I is the input matrix (max size 1920x1080x1)
             %
             % Example::
-            %           d.display(ones(1920,1080))
+            %           d.displayImage(ones(1920,1080))
             
             
             % check which display mode the dmd is in
@@ -275,7 +275,7 @@ classdef DMD < handle
                 cmd.addCommand({'0x1A', '0x01'}, data);   % set the usb command
                 dmd.send(cmd)
                 dmd.receive;
-                dmd.display(zeros(1080,1920));
+                dmd.displayImage(zeros(1080,1920));
             end
         end
         
@@ -285,12 +285,12 @@ classdef DMD < handle
             %
             
             idx             = 0;    % pattern index
-            exposureTime    = 500000;  % exposure time in �s
+            exposureTime    = 500000;  % exposure time in us
             clearAfter      = 1;    % clear pattern after exposure
             bitDepth        = 1;    % desired bit depth (1 corresponds to bitdepth of 1)
             leds            = 1;    % select which color to use
-            triggerIn       = 0;    % wait for trigger or cuntinue
-            darkTime        = 0;    % dark time after exposure in �s
+            triggerIn       = 1;    % wait for trigger or cuntinue
+            darkTime        = 0;    % dark time after exposure in us
             triggerOut      = 0;    % use trigger2 as output
             patternIdx      = 0;    % image pattern index
             bitPosition     = 0;    % bit position in image pattern

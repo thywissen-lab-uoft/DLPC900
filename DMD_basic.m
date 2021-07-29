@@ -16,10 +16,6 @@ R=100;
 inds=sqrt((xx-1920/2).^2+(yy-1080/2).^2)<R;
 I(inds)=0;
 
-
-% I=makeUoT;
-% I=~I;
-
 % inds=sqrt((xx-1920/2).^2+(yy-1080/2-200).^2)<R;
 % I(inds)=0;
 % 
@@ -32,7 +28,38 @@ I(inds)=0;
 % inds=sqrt((xx-(1920/2+200)).^2+(yy-1080/2).^2)<R;
 % I(inds)=0;
 
+%% Fun shapes
+% I=makeUoT;
+% I=~I;
 
+%% Gaussian dimple
+
+% Initialize to ones
+I=ones(1080,1920);
+[xx,yy]=meshgrid(1:1920,1:1080);
+s=50; % gaussian radius in pixels
+
+I=I-exp(-((xx-1920/2).^2+(yy-1080/2).^2)/(2*s^2));
+
+
+%% Parabolic dimple
+
+% Initialize to ones
+I=ones(1080,1920);
+[xx,yy]=meshgrid(1:1920,1:1080);
+
+R=50;    % Radius of zero potential
+a=1/R^2; % Curvature term
+
+
+rr=((xx-1920/2).^2+(yy-1080/2).^2).^(1/2);
+I=a*rr.^2;
+I(rr>R)=1;
+
+
+
+
+%%
 % Deconvole with gaussian profile of beam
 doGrayScale=1;
 if doGrayScale

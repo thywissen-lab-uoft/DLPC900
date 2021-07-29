@@ -2,9 +2,14 @@ function zOut = makeUoT
 
 data=load('UoT.mat');
 data=data.zUoT;
+
+data=load('beaver.mat');
+data=data.z;
+data=~data;
+
 img=zeros(1080,1920);
 
-s=251;
+s=300;
 data2=imresize(data,[2*s 2*s]);
 
 
@@ -19,7 +24,7 @@ img=img/max(max(img));
 
 img=round(img);
 
-zOut=img;
+zOut=logical(img);
 
 
 end

@@ -16,6 +16,10 @@ R=100;
 inds=sqrt((xx-1920/2).^2+(yy-1080/2).^2)<R;
 I(inds)=0;
 
+
+% I=makeUoT;
+% I=~I;
+
 % inds=sqrt((xx-1920/2).^2+(yy-1080/2-200).^2)<R;
 % I(inds)=0;
 % 

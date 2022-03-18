@@ -6,15 +6,15 @@ addpath(dmdDir);addpath(genpath(dmdDir))
 %% Define  Image
 
 % Initialize to ones
-I=ones(1080,1920);
+% I=ones(1080,1920);
 
 % Initialize to zeros
 % I=zeros(1080,1920);
-
-R=100;
-[xx,yy]=meshgrid(1:1920,1:1080);
-inds=sqrt((xx-1920/2).^2+(yy-1080/2).^2)<R;
-I(inds)=0;
+% 
+% R=100;
+% [xx,yy]=meshgrid(1:1920,1:1080);
+% inds=sqrt((xx-1920/2).^2+(yy-1080/2).^2)<R;
+% I(inds)=1;
 
 % inds=sqrt((xx-1920/2).^2+(yy-1080/2-200).^2)<R;
 % I(inds)=0;
@@ -37,24 +37,33 @@ I(inds)=0;
 % Initialize to ones
 I=ones(1080,1920);
 [xx,yy]=meshgrid(1:1920,1:1080);
-s=50; % gaussian radius in pixels
+s=75; % gaussian radius in pixels
 
 I=I-exp(-((xx-1920/2).^2+(yy-1080/2).^2)/(2*s^2));
+
+R=100;
+[xx,yy]=meshgrid(1:1920,1:1080);
+inds=sqrt((xx-1920/2).^2+(yy-1080/2).^2)<R;
+I(inds)=0;
+
+
+
+
 
 
 %% Parabolic dimple
 
 % Initialize to ones
-I=ones(1080,1920);
-[xx,yy]=meshgrid(1:1920,1:1080);
-
-R=50;    % Radius of zero potential
-a=1/R^2; % Curvature term
-
-
-rr=((xx-1920/2).^2+(yy-1080/2).^2).^(1/2);
-I=a*rr.^2;
-I(rr>R)=1;
+% I=ones(1080,1920);
+% [xx,yy]=meshgrid(1:1920,1:1080);
+% 
+% R=400;    % Radius of zero potential
+% a=1/R^2; % Curvature term
+% 
+% 
+% rr=((xx-1920/2).^2+(yy-1080/2).^2).^(1/2);
+% I=a*rr.^2;
+% I(rr>R)=1;
 
 
 
@@ -63,9 +72,12 @@ I(rr>R)=1;
 % Deconvole with gaussian profile of beam
 doGrayScale=1;
 if doGrayScale
-    I=I*.2;
-
-    str='DCC_2021-07-28_14-26-10.mat'; 
+    I=I*0.5;
+    
+    figure(100)
+    plot(I(520,:))
+    
+    str='DCC_2021-08-06_16-47-29.mat'; 
     Zbeam = getGaussEnvelope(str);
     
     % Divide by envelope
